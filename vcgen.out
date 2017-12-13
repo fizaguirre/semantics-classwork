@@ -1,0 +1,27 @@
+Programa Teste
+(((0 <= x) ==> (1 == (0!))) and ((T and T) and (((T and T) and (((y == (z!)) and (z <> x)) ==> ((y x (z + 1)) == ((z + 1)!)))) and (((y == (z!)) and (not (z <> x))) ==> (y == (x!))))))
+
+Ex.: (1)
+((T ==> (((((x + 1) - 1) == 0) ==> (1 == (x + 1))) and ((not (((x + 1) - 1) == 0)) ==> ((x + 1) == (x + 1))))) and (T and (T and T)))
+
+Ex.: (3)
+(((not (x <= 0)) ==> (1 == (0!))) and ((T and T) and (((T and T) and (((y == (z!)) and (z <> x)) ==> ((y x (z + 1)) == ((z + 1)!)))) and (((y == (z!)) and (not (z <> x))) ==> (y == (x!))))))
+
+Ex.: (4)
+((T ==> (1 == (0!))) and ((T and T) and (((T and T) and (((y == (z!)) and (z <> x)) ==> ((y x (z + 1)) == ((z + 1)!)))) and (((y == (z!)) and (not (z <> x))) ==> (y == (x!))))))
+
+Ex.: (6)
+((((x == x0) and (not (x <= x))) ==> ((1 x (x!)) == (x0!))) and (T and (((T and T) and ((((y x (x!)) == (x0!)) and (x <> 0)) ==> (((y x x) x ((x - 1)!)) == (x0!)))) and ((((y x (x!)) == (x0!)) and (not (x <> 0))) ==> (y == (x0!))))))
+
+Ex.: (8)
+(((not (x <= 0)) ==> ((x - 0) == (x - 0))) and ((T and T) and (((T and T) and ((((x - y) == (x - y)) and (a <> 0)) ==> ((x - (y + 1)) == (x - (y + 1))))) and ((((x - y) == (x - y)) and (not (a <> 0))) ==> (x == y)))))
+
+Ex.: (9)
+(((not (y <= 0)) ==> (0 == (0 x x))) and ((T and T) and (((T and T) and (((z == (a x x)) and (a <> z)) ==> ((z + x) == ((a + 1) x x)))) and (((z == (a x x)) and (not (a <> z))) ==> (z == (x x y))))))
+
+Ex.: (10)
+((((y == y0) and (not (y <= 0))) ==> (0 == (x x (y0 - y)))) and (T and (((T and T) and (((z == (x x (y0 - y))) and (y <> 0)) ==> ((z + x) == (x x (y0 - y))))) and (((z == (x x (y0 - y))) and (not (y <> 0))) ==> (z == (x x y0))))))
+
+Ex.: (11)
+(((not (x <= 0)) ==> (((1 x (x!)) == (x!)) and (not (x <= 0)))) and ((T and T) and (((T and T) and (((((y x (a!)) == (x!)) and (not (a <= 0))) and (not (a <= 0))) ==> ((((y x a) x ((a - 1)!)) == (x!)) and (not ((a - 1) <= 0))))) and (((((y x (a!)) == (x!)) and (not (a <= 0))) and (not (not (a <= 0)))) ==> (y == (x!))))))
+

@@ -1,0 +1,40 @@
+type term =
+TN
+|TTrue
+|TFalse
+|TX of term
+|TIf of term * term * term
+|TLEq of term * term
+|TPlus of term * term
+|TSeq of term * term
+|TPop
+|TGet of term * term;;
+
+
+let rec subst x (t:term) = function
+|	TN -> TN
+|	TTrue -> TTrue
+|	TFalse -> TFalse
+|	TX(y) -> if (x = y) then t else TN(y)
+|	If(t1,t2,t3) -> TIf( (subst x t t1), (subst x t t2), (subst x t t3))
+|	TLeq(t1,t2) -> TLeq( (subst x t t1), (subst x t t2) )
+|	TPlus(t1,t2) -> TPlus( (subst x t t1), (subst x t t2) )
+|	TSeq(t1,t2) -> TSeq( (subst x t t1), (subst x t t2) )
+|	TPop -> TPop
+|	TGet(y,t1) -> if (x = y) then TGet(y,t1) else TGet(y, (subst x t t1));;
+
+
+let rec step (state:term) l = match state with
+	TIf(t1,t2,t3) -> let (t', l') = (step state l) in (TIf(t', t2, t3),l) (* E-IF1 *)
+|	TIf(TTrue, t2, t3) -> (t2,l) (* E-IF2 *)
+|	TIf(TFalse, t2, t3) -> (t3,l) (* E-IF3 *)
+|	TLeq(t1,t2) -> let (t1', l') = (step t1 l) in (TLeq(t1', t2'),l') (* E-LEQ1 *)
+|	TLeq(TN(n1),t2) -> let (t2',l') = (step t2 l) in (TLeq(n1, t2'),l') (* E-LEQ 2 *)
+|	TLeq(TN(n1),TN(n2)) -> if n1 > n2 then (TFalse,l) else (TTrue,l) (* E-LEQ 3 e E-LEQ 4 *)
+|	TPlus(t1,t2) -> let (t1',l') = (step t1 l) in (TPlus(t1',t2),l) (* E-PLUS 1 *)
+|	TPlus(TN(n),t2) -> let (t2',_) = (step t2 l) in (TPlus(t2',l),l) (* E-PLUS 2 *)
+|	TPlus(n1,n2) -> (n1+n2, l) (* E-PLUS3 *)
+|	TSeq(TN(n),state) -> (state, n::l) (* E-SEQ 2 *)
+|	TSeq(t1,t2) -> let (t1', l') = (step t1 l) in (TSeq(t1',t2),l') (* E-SEQ 1 *)
+|	TPop -> ((List.hd l), List.tl l) (* E-POP *)
+|	TGet(x,state) -> let n = (List.hd l) in  ((subst x n state),l);; (* E-GET *)
